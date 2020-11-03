@@ -5,7 +5,7 @@ const Loader = () => {
   return (
     <Spinner
       animation="border"
-      variant="warning"
+      variant="info"
       role="status"
       style={{
         position: "absolute",
