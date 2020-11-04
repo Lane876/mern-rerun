@@ -8,13 +8,9 @@ const Loader = () => {
       variant="info"
       role="status"
       style={{
-        position: "absolute",
         width: "100px",
         height: "100px",
-        top: "40%",
-        left: "50%",
-        marginLeft: "-50px",
-        marginRight: "-50px",
+        margin: "auto",
         display: "block",
       }}
     >
