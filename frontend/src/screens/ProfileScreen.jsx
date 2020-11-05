@@ -12,6 +12,7 @@ const ProfileScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [disable, setDisabled] = useState(true);
   const [message, setMessage] = useState(null);
 
   const dispatch = useDispatch();
@@ -41,8 +42,17 @@ const ProfileScreen = ({ location, history }) => {
         setEmail(user.email);
       }
     }
+
+    if (password) {
+      if (password === confirmPassword) {
+        setDisabled(false);
+      } else {
+        setDisabled(true);
+      }
+    }
+
     // eslint-disable-next-line
-  }, [user, dispatch, history]);
+  }, [user, dispatch, history, password, confirmPassword]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -53,7 +63,6 @@ const ProfileScreen = ({ location, history }) => {
     }
   };
 
-  console.log(userUpdateProfile);
   return (
     <Row>
       <Col md={3}>
@@ -107,7 +116,11 @@ const ProfileScreen = ({ location, history }) => {
               ></Form.Control>
             </Form.Group>
 
-            <Button type="submit" variant="primary">
+            <Button
+              type="submit"
+              variant="primary"
+              disabled={name === user.name && email === user.email && disable}
+            >
               Update
             </Button>
           </Form>
