@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import { motion } from "framer-motion";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -16,8 +17,27 @@ const HomeScreen = () => {
     dispatch(listProducts());
   }, [dispatch]);
 
+  const containerVariants = {
+    start: {
+      x: `-100vw`,
+    },
+    end: {
+      x: 0,
+      transition: { delay: 0.3, duration: 0.5, type: "spring" },
+    },
+    exit: {
+      x: "-100vw",
+      transition: { ease: "easeInOut" },
+    },
+  };
+
   return (
-    <>
+    <motion.div
+      variants={containerVariants}
+      initial="start"
+      animate="end"
+      exit="exit"
+    >
       <h1>Latest Products</h1>
       {loading ? (
         <Loader />
@@ -32,7 +52,7 @@ const HomeScreen = () => {
           ))}
         </Row>
       )}
-    </>
+    </motion.div>
   );
 };
 

@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from "../actions/productActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import { motion } from "framer-motion";
 
 const ProductScreen = ({ match, history }) => {
   const [qty, setQty] = useState(1);
@@ -30,11 +31,32 @@ const ProductScreen = ({ match, history }) => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
+  const containerVariants = {
+    start: {
+      x: `-100vw`,
+    },
+    end: {
+      x: 0,
+      transition: { delay: 0.3, duration: 0.5, type: "spring" },
+    },
+    exit: {
+      x: "-100vw",
+      transition: { ease: "easeInOut" },
+    },
+  };
+
   return (
-    <>
-      <Link to="/" className="btn btn-primary my-3">
-        GO BACK
-      </Link>
+    <motion.div
+      variants={containerVariants}
+      initial="start"
+      animate="end"
+      exit="exit"
+    >
+      <motion.div whileHover={{ scale: 1.1, originX: 0 }}>
+        <Link to="/" className="btn btn-primary my-3">
+          GO BACK
+        </Link>
+      </motion.div>
       {loading ? (
         <Loader />
       ) : error ? (
@@ -117,7 +139,7 @@ const ProductScreen = ({ match, history }) => {
           </Col>
         </Row>
       )}
-    </>
+    </motion.div>
   );
 };
 

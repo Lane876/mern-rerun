@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
+import { motion } from "framer-motion";
+
 // import { listMyOrders } from "../actions/orderActions";
 
 const ProfileScreen = ({ location, history }) => {
@@ -63,8 +65,26 @@ const ProfileScreen = ({ location, history }) => {
     }
   };
 
+  const containerVariants = {
+    start: {
+      x: `-100vw`,
+    },
+    end: {
+      x: 0,
+      transition: { delay: 0.3, duration: 0.5, type: "spring" },
+    },
+    exit: {
+      x: "-100vw",
+      transition: { ease: "easeInOut" },
+    },
+  };
   return (
-    <Row>
+    <motion.Row
+      variants={containerVariants}
+      initial="start"
+      animate="end"
+      exit="exit"
+    >
       <Col md={3}>
         <h2>User Profile</h2>
         {message && <Message variant="danger">{message}</Message>}
@@ -177,7 +197,7 @@ const ProfileScreen = ({ location, history }) => {
           </Table>
         )} */}
       </Col>
-    </Row>
+    </motion.Row>
   );
 };
 
