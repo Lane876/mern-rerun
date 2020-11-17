@@ -11,6 +11,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./screens/PaymentSceen";
 import { AnimatePresence } from "framer-motion";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 
 const App = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ const App = () => {
             <Switch location={location} key={location.key}>
               <Route path="/login" component={LoginScreen} />
               <Route path="/payment" component={PaymentScreen} />
+              <Route path="/placeorder" component={PlaceOrderScreen} />
               <Route path="/shipping" component={ShippingScreen} />
               <Route path="/register" component={RegisterScreen} />
               <Route path="/profile" component={ProfileScreen} />
