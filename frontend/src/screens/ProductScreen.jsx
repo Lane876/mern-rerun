@@ -33,14 +33,14 @@ const ProductScreen = ({ match, history }) => {
 
   const containerVariants = {
     start: {
-      x: `-100vw`,
+      x: `-100%`,
     },
     end: {
       x: 0,
       transition: { delay: 0.3, duration: 0.5, type: "spring" },
     },
     exit: {
-      x: "-100vw",
+      x: "-100%",
       transition: { ease: "easeInOut" },
     },
   };

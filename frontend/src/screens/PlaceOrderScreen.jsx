@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { Link } from "react-router-dom";
-// import { createOrder } from "../actions/orderActions";
+import { createOrder } from "../actions/orderActions";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 
@@ -30,33 +30,33 @@ const PlaceOrderScreen = ({ history }) => {
     Number(cart.taxPrice)
   ).toFixed(2);
 
-  //   const orderCreate = useSelector((state) => state.orderCreate);
-  //   const { error, success, order } = orderCreate;
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { error, success, order } = orderCreate;
 
-  //   useEffect(() => {
-  //     if (success) {
-  //       history.push(`/order/${order._id}`);
-  //     }
-  //     // eslint-disable-next-line
-  //   }, [history, success]);
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`);
+    }
+    // eslint-disable-next-line
+  }, [history, success]);
 
   const placeOrderHandler = () => {
-    //   dispatch(
-    //     createOrder({
-    //       orderItems: cart.cartItems,
-    //       shippingAddress: cart.shippingAddress,
-    //       paymentMethod: cart.paymentMethod,
-    //       itemsPrice: cart.itemsPrice,
-    //       shippingPrice: cart.shippingPrice,
-    //       taxPrice: cart.taxPrice,
-    //       totalPrice: cart.totalPrice,
-    //     })
-    //   );
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
   };
 
   const containerVariants = {
     start: {
-      x: `-100vw`,
+      x: "-100%",
     },
     end: {
       x: 0,
@@ -158,9 +158,9 @@ const PlaceOrderScreen = ({ history }) => {
                   <Col>${cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
-              {/* <ListGroup.Item>
+              <ListGroup.Item>
                 {error && <Message variant="danger">{error}</Message>}
-              </ListGroup.Item> */}
+              </ListGroup.Item>
 
               <ListGroup.Item>
                 <Button
